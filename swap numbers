@@ -1,0 +1,30 @@
+
+class HelloWorld {
+    public static void main(String[] args) {
+        
+        int x = 5;
+        int y = 3;
+        int z = 0;
+        
+        System.out.println("Before the swap");
+        System.out.println(x);
+        System.out.println(y);
+
+        swap(x,y);
+    }
+    public static void swap(int x, int y)
+    {
+        int z = 0;
+        int i = 0;
+        z=x;
+        i=y;
+        
+        y=z;
+        x=i;
+        
+        System.out.println("After the swap");
+        System.out.println(x);
+        System.out.println(y);
+        
+    }
+}
