@@ -1,0 +1,57 @@
+
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+@Autonomous
+
+public class Luqman extends LinearOpMode {
+
+    double kp = 0.2;
+    
+    DcMotor frontright;
+    DcMotor frontleft;
+    DcMotor backright;
+    DcMotor backleft;
+    
+    @Override
+    public void runOpMode() {
+        
+    frontright = hardwareMap.get(DcMotor.class, "frontright");
+    frontleft = hardwareMap.get(DcMotor.class, "frontleft");
+    backright = hardwareMap.get(DcMotor.class, "backright");
+    backleft = hardwareMap.get(DcMotor.class, "backleft");
+    
+        telemetry.addData("Status", "Initialized");
+        telemetry.update();
+        waitForStart();
+        
+        frontright.setpower(0.5);
+        frontleft.setpower(0.5);
+        backright.setpower(0.5);
+        backleft.setpower(0.5);
+        sleep(1000);
+        frontright.setpower(0);
+        frontleft.setpower(0);
+        backright.setpower(0);
+        backleft.setpower(0);
+        
+        while (opModeIsActive()) {
+            telemetry.addData("Status", "Running");
+            telemetry.update();
+        }
+    }
+    public double pidcontroller(double TargetPoint, double LocationOfRobot)
+    {
+    double error = TargetPoint - LocationOfRobot; 
+    error *= kp;
+    return error;
+    }
+    
+}
