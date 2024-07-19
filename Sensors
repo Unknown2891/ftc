@@ -1,0 +1,56 @@
+
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import java.util.Locale;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.TouchSensor;
+import com.qualcomm.robotcore.hardware.DistanceSensor;
+
+@Autonomous
+
+public class Sensors extends LinearOpMode {
+
+    ColorSensor colorsensor = null;
+    TouchSensor touch = null;
+    DistanceSensor Distance = null;
+
+
+    @Override
+    public void runOpMode() {
+
+        colorsensor = hardwareMap.get(ColorSensor.class, "color_sensor");
+        touch = hardwareMap.get(TouchSensor.class, "testtouch");
+        Distance = hardwareMap.get(DistanceSensor.class, "distance");
+
+        telemetry.addData("Status", "Initialized");
+        touch.isPressed();
+        telemetry.update();
+        waitForStart();
+
+        while (opModeIsActive()) {
+            telemetry.addData("Distance (cm)",
+            String.format(Locale.US, "%.02f", 
+            Distance.getDistance(DistanceUnit.CM)));
+            telemetry.addData("Status", "Running");
+            telemetry.addData("Red  ", colorsensor.red());
+            telemetry.addData("Green", colorsensor.green());
+            telemetry.addData("Blue ", colorsensor.blue());
+            telemetry.update();
+            if (touch.isPressed()) {
+                telemetry.addData("Touch", "Is pressed");
+            } else {
+                telemetry.addData("Touch", "Is not Pressed");
+            }
+
+
+        }
+    }
+}
