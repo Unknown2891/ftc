@@ -17,8 +17,8 @@ public class Team1 extends LinearOpMode {
     private DcMotor backleft = null;
     private DcMotor frontright = null;
     private DcMotor backright = null;
+    IMU imu;
     
-
     @Override
     public void runOpMode() {
         
